@@ -12,12 +12,7 @@ const test = base.extend<{
   worker: createWorkerFixture(handlers),
 });
 
-test("should work", async ({ page, request }) => {
-  await page.goto("http://localhost:3000");
-  const response = await request.post("/v1/post/get", {
-    data: {
-      id: 1,
-    },
-  });
-  expect(response.status()).toBe(200);
+test("should work", async ({ page, worker }) => {
+  await page.goto("/");
+  await expect(page.getByTestId("response")).not.toHaveText("");
 });
