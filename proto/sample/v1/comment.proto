@@ -6,7 +6,7 @@ option go_package = "github.com/nissy-dev/protocol-buffer-sandbox";
 import "google/api/annotations.proto";
 
 service CommentService {
-  rpc Get(CommentRequest) returns (CommentResponse) {
+  rpc Get(CommentServiceGetRequest) returns (CommentServiceGetResponse) {
     option (google.api.http) = {
       post : "/v1/comment/get",
       body : "*"
@@ -14,10 +14,10 @@ service CommentService {
   }
 }
 
-message CommentRequest {
-  string comment = 1;
+message CommentServiceGetRequest {
+  int32 id = 1;
 }
 
-message CommentResponse {
+message CommentServiceGetResponse {
   string comment = 1;
 }

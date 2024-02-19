@@ -18,10 +18,18 @@
   "scripts": {
     "lint": "buf lint",
     "format": "buf format -w",
-    "generate": "rm -rf gen && buf generate"
+    "build": "rm -rf gen && npm run buf:generate && npm run type:generate",
+    "buf:generate": "buf generate",
+    "type:generate": "openapi-typescript gen/openapi-schema/apidocs.swagger.json -o ./src/types/schema.d.ts"
   },
   "devDependencies": {
     "@bufbuild/buf": "1.29.0",
-    "@bufbuild/protobuf": "1.7.2"
+    "@bufbuild/protobuf": "1.7.2",
+    "@tsconfig/strictest": "2.0.3",
+    "openapi-typescript": "5.4.1",
+    "typescript": "5.3.3"
+  },
+  "dependencies": {
+    "openapi-fetch": "0.9.2"
   }
 }

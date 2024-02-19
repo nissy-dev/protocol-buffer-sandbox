@@ -4,16 +4,48 @@ package proto.sample.v1;
 option go_package = "github.com/nissy-dev/protocol-buffer-sandbox";
 
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service PostService {
-  rpc Get(PostRequest) returns (PostResponse) {
+  rpc Get(PostServiceGetRequest) returns (PostServiceGetResponse) {
     option (google.api.http) = {
       post : "/v1/post/get"
       body : "*"
     };
   }
+
+  rpc Search(PostServiceSearchRequest) returns (PostServiceSearchResponse) {
+    option (google.api.http) = {
+      post : "/v1/post/search"
+      body : "*"
+    };
+  }
 }
 
-message PostRequest { string todo = 1; }
+message PostServiceGetRequest { int32 id = 1; }
 
-message PostResponse { string todo = 1; }
+message PostServiceGetResponse {
+  Post row = 1;
+}
+
+message PostServiceSearchRequest {
+  string keyword = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {pattern: "^start"}];
+  optional string start = 2;
+  optional string end = 3;
+}
+
+message PostServiceSearchResponse {
+  repeated Post rows = 1;
+}
+
+message Post {
+  int32 id = 1;
+  string name = 2;
+  string title = 3;
+  string created_at = 4;
+}
+
+message DateRange {
+  string start = 1;
+  string end = 2;
+}
