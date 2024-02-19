@@ -1,4 +1,4 @@
-# protocol-buffer-sandbox
+# protocol-buffers-to-openapi-sandbox
 
 ## 使い方
 
