@@ -18,15 +18,17 @@
   "scripts": {
     "lint": "buf lint",
     "format": "buf format -w",
-    "build": "rm -rf gen && npm run buf:generate && npm run type:generate",
+    "build": "rm -rf gen && npm run buf:generate && npm run openapi:convert && npm run openapi:generate",
     "buf:generate": "buf generate",
-    "type:generate": "openapi-typescript gen/openapi-schema/apidocs.swagger.json -o ./src/types/schema.d.ts"
+    "openapi:convert": "openapi-generator-cli generate -g openapi-yaml -i gen/openapi-v2/apidocs.swagger.json -o gen/openapi-v3",
+    "openapi:generate": "openapi-typescript gen/openapi-v3/openapi/openapi.yaml -o ./src/types/schema.d.ts"
   },
   "devDependencies": {
     "@bufbuild/buf": "1.29.0",
     "@bufbuild/protobuf": "1.7.2",
+    "@openapitools/openapi-generator-cli": "2.9.0",
     "@tsconfig/strictest": "2.0.3",
-    "openapi-typescript": "5.4.1",
+    "openapi-typescript": "6.7.4",
     "typescript": "5.3.3"
   },
   "dependencies": {

@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 0.0.0
+servers:
+- url: /
+tags:
+- name: CommentService
+- name: PostService
+paths:
+  /v1/comment/get:
+    post:
+      operationId: CommentService_Get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1CommentServiceGetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1CommentServiceGetResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      tags:
+      - CommentService
+      x-codegen-request-body-name: body
+  /v1/post/get:
+    post:
+      operationId: PostService_Get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PostServiceGetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PostServiceGetResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      tags:
+      - PostService
+      x-codegen-request-body-name: body
+  /v1/post/search:
+    post:
+      operationId: PostService_Search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1PostServiceSearchRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1PostServiceSearchResponse'
+          description: A successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+          description: An unexpected error response.
+      tags:
+      - PostService
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    protobufAny:
+      additionalProperties:
+        type: object
+      example:
+        '@type': '@type'
+      properties:
+        '@type':
+          type: string
+      type: object
+    rpcStatus:
+      example:
+        code: 0
+        details:
+        - '@type': '@type'
+        - '@type': '@type'
+        message: message
+      properties:
+        code:
+          format: int32
+          type: integer
+        message:
+          type: string
+        details:
+          items:
+            $ref: '#/components/schemas/protobufAny'
+          type: array
+      type: object
+    v1CommentServiceGetRequest:
+      properties:
+        id:
+          format: int32
+          type: integer
+      type: object
+    v1CommentServiceGetResponse:
+      example:
+        comment: comment
+      properties:
+        comment:
+          type: string
+      type: object
+    v1Post:
+      example:
+        createdAt: createdAt
+        name: name
+        id: 0
+        title: title
+      properties:
+        id:
+          format: int32
+          type: integer
+        name:
+          type: string
+        title:
+          type: string
+        createdAt:
+          type: string
+      type: object
+    v1PostServiceGetRequest:
+      properties:
+        id:
+          format: int32
+          type: integer
+      type: object
+    v1PostServiceGetResponse:
+      example:
+        row:
+          createdAt: createdAt
+          name: name
+          id: 0
+          title: title
+      properties:
+        row:
+          $ref: '#/components/schemas/v1Post'
+      type: object
+    v1PostServiceSearchRequest:
+      properties:
+        keyword:
+          pattern: ^start
+          type: string
+        start:
+          type: string
+        end:
+          type: string
+      type: object
+    v1PostServiceSearchResponse:
+      example:
+        rows:
+        - createdAt: createdAt
+          name: name
+          id: 0
+          title: title
+        - createdAt: createdAt
+          name: name
+          id: 0
+          title: title
+      properties:
+        rows:
+          items:
+            $ref: '#/components/schemas/v1Post'
+          type: array
+      type: object
+x-original-swagger-version: "2.0"

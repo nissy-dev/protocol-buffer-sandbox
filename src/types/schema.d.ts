@@ -15,99 +15,183 @@ export interface paths {
   };
 }
 
-export interface definitions {
-  protobufAny: {
-    "@type"?: string;
-  } & { [key: string]: unknown };
-  rpcStatus: {
-    /** Format: int32 */
-    code?: number;
-    message?: string;
-    details?: definitions["protobufAny"][];
+export type webhooks = Record<string, never>;
+
+export interface components {
+  schemas: {
+    /**
+     * @example {
+     *   "@type": "@type"
+     * }
+     */
+    protobufAny: {
+      "@type"?: string;
+      [key: string]: Record<string, never> | undefined;
+    };
+    /**
+     * @example {
+     *   "code": 0,
+     *   "details": [
+     *     {
+     *       "@type": "@type"
+     *     },
+     *     {
+     *       "@type": "@type"
+     *     }
+     *   ],
+     *   "message": "message"
+     * }
+     */
+    rpcStatus: {
+      /** Format: int32 */
+      code?: number;
+      message?: string;
+      details?: components["schemas"]["protobufAny"][];
+    };
+    v1CommentServiceGetRequest: {
+      /** Format: int32 */
+      id?: number;
+    };
+    /**
+     * @example {
+     *   "comment": "comment"
+     * }
+     */
+    v1CommentServiceGetResponse: {
+      comment?: string;
+    };
+    /**
+     * @example {
+     *   "createdAt": "createdAt",
+     *   "name": "name",
+     *   "id": 0,
+     *   "title": "title"
+     * }
+     */
+    v1Post: {
+      /** Format: int32 */
+      id?: number;
+      name?: string;
+      title?: string;
+      createdAt?: string;
+    };
+    v1PostServiceGetRequest: {
+      /** Format: int32 */
+      id?: number;
+    };
+    /**
+     * @example {
+     *   "row": {
+     *     "createdAt": "createdAt",
+     *     "name": "name",
+     *     "id": 0,
+     *     "title": "title"
+     *   }
+     * }
+     */
+    v1PostServiceGetResponse: {
+      row?: components["schemas"]["v1Post"];
+    };
+    v1PostServiceSearchRequest: {
+      keyword?: string;
+      start?: string;
+      end?: string;
+    };
+    /**
+     * @example {
+     *   "rows": [
+     *     {
+     *       "createdAt": "createdAt",
+     *       "name": "name",
+     *       "id": 0,
+     *       "title": "title"
+     *     },
+     *     {
+     *       "createdAt": "createdAt",
+     *       "name": "name",
+     *       "id": 0,
+     *       "title": "title"
+     *     }
+     *   ]
+     * }
+     */
+    v1PostServiceSearchResponse: {
+      rows?: components["schemas"]["v1Post"][];
+    };
   };
-  v1CommentServiceGetRequest: {
-    /** Format: int32 */
-    id?: number;
-  };
-  v1CommentServiceGetResponse: {
-    comment?: string;
-  };
-  v1Post: {
-    /** Format: int32 */
-    id?: number;
-    name?: string;
-    title?: string;
-    createdAt?: string;
-  };
-  v1PostServiceGetRequest: {
-    /** Format: int32 */
-    id?: number;
-  };
-  v1PostServiceGetResponse: {
-    row?: definitions["v1Post"];
-  };
-  v1PostServiceSearchRequest: {
-    keyword?: string;
-    start?: string;
-    end?: string;
-  };
-  v1PostServiceSearchResponse: {
-    rows?: definitions["v1Post"][];
-  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
+
+export type $defs = Record<string, never>;
+
+export type external = Record<string, never>;
 
 export interface operations {
   CommentService_Get: {
-    parameters: {
-      body: {
-        body: definitions["v1CommentServiceGetRequest"];
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["v1CommentServiceGetRequest"];
       };
     };
     responses: {
-      /** A successful response. */
+      /** @description A successful response. */
       200: {
-        schema: definitions["v1CommentServiceGetResponse"];
+        content: {
+          "application/json": components["schemas"]["v1CommentServiceGetResponse"];
+        };
       };
-      /** An unexpected error response. */
+      /** @description An unexpected error response. */
       default: {
-        schema: definitions["rpcStatus"];
+        content: {
+          "application/json": components["schemas"]["rpcStatus"];
+        };
       };
     };
   };
   PostService_Get: {
-    parameters: {
-      body: {
-        body: definitions["v1PostServiceGetRequest"];
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["v1PostServiceGetRequest"];
       };
     };
     responses: {
-      /** A successful response. */
+      /** @description A successful response. */
       200: {
-        schema: definitions["v1PostServiceGetResponse"];
+        content: {
+          "application/json": components["schemas"]["v1PostServiceGetResponse"];
+        };
       };
-      /** An unexpected error response. */
+      /** @description An unexpected error response. */
       default: {
-        schema: definitions["rpcStatus"];
+        content: {
+          "application/json": components["schemas"]["rpcStatus"];
+        };
       };
     };
   };
   PostService_Search: {
-    parameters: {
-      body: {
-        body: definitions["v1PostServiceSearchRequest"];
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["v1PostServiceSearchRequest"];
       };
     };
     responses: {
-      /** A successful response. */
+      /** @description A successful response. */
       200: {
-        schema: definitions["v1PostServiceSearchResponse"];
+        content: {
+          "application/json": components["schemas"]["v1PostServiceSearchResponse"];
+        };
       };
-      /** An unexpected error response. */
+      /** @description An unexpected error response. */
       default: {
-        schema: definitions["rpcStatus"];
+        content: {
+          "application/json": components["schemas"]["rpcStatus"];
+        };
       };
     };
   };
 }
-
-export interface external {}

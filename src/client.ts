@@ -5,6 +5,6 @@ const client = createClient<paths>({ baseUrl: "https://myapi.dev/v1/" });
 
 (async () => {
   const { data } = await client.POST("/v1/post/get", {
-    params: { body: { body: { id: 1 } } },
+    body: { id: 1 },
   });
 })();
