@@ -1,0 +1,27 @@
+{
+  "name": "protocol-buffer-sandbox",
+  "description": "",
+  "version": "0.0.1",
+  "author": "nissy-dev <nd.12021218@gmail.com> (https://github.com/nissy-dev)",
+  "bugs": {
+    "url": "https://github.com/nissy-dev/protocol-buffer-sandbox/issues"
+  },
+  "homepage": "https://github.com/nissy-dev/protocol-buffer-sandbox",
+  "keywords": [],
+  "license": "MIT",
+  "main": "",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nissy-dev/protocol-buffer-sandbox.git"
+  },
+  "scripts": {
+    "lint": "buf lint",
+    "format": "buf format -w",
+    "generate": "rm -rf gen && buf generate"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "1.29.0",
+    "@bufbuild/protobuf": "1.7.2"
+  }
+}

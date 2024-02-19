@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package proto.sample.v1;
+option go_package = "github.com/nissy-dev/protocol-buffer-sandbox";
+
+import "google/api/annotations.proto";
+
+service PostService {
+  rpc Get(PostRequest) returns (PostResponse) {
+    option (google.api.http) = {
+      post : "/v1/post/get"
+      body : "*"
+    };
+  }
+}
+
+message PostRequest { string todo = 1; }
+
+message PostResponse { string todo = 1; }
