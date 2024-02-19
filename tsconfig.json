@@ -1,6 +1,8 @@
 {
   "extends": "@tsconfig/strictest/tsconfig.json",
   "compilerOptions": {
-    "lib": ["ESNext", ]
+    "lib": ["ESNext"],
+    "jsx": "react-jsx",
+    "skipLibCheck": true
   }
 }

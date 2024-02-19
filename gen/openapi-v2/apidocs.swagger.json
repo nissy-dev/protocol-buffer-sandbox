@@ -181,7 +181,13 @@
         "createdAt": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "id",
+        "name",
+        "title",
+        "createdAt"
+      ]
     },
     "v1PostServiceGetRequest": {
       "type": "object",
@@ -190,7 +196,10 @@
           "type": "integer",
           "format": "int32"
         }
-      }
+      },
+      "required": [
+        "id"
+      ]
     },
     "v1PostServiceGetResponse": {
       "type": "object",
@@ -198,7 +207,10 @@
         "row": {
           "$ref": "#/definitions/v1Post"
         }
-      }
+      },
+      "required": [
+        "row"
+      ]
     },
     "v1PostServiceSearchRequest": {
       "type": "object",
@@ -213,7 +225,10 @@
         "end": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "keyword"
+      ]
     },
     "v1PostServiceSearchResponse": {
       "type": "object",

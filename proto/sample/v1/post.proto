@@ -1,37 +1,56 @@
 syntax = "proto3";
 
 package proto.sample.v1;
-option go_package = "github.com/nissy-dev/protocol-buffer-sandbox";
 
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
+option go_package = "github.com/nissy-dev/protocol-buffer-sandbox";
+
 service PostService {
   rpc Get(PostServiceGetRequest) returns (PostServiceGetResponse) {
     option (google.api.http) = {
-      post : "/v1/post/get"
-      body : "*"
+      post: "/v1/post/get"
+      body: "*"
     };
   }
 
   rpc Search(PostServiceSearchRequest) returns (PostServiceSearchResponse) {
     option (google.api.http) = {
-      post : "/v1/post/search"
-      body : "*"
+      post: "/v1/post/search"
+      body: "*"
     };
   }
 }
 
-message PostServiceGetRequest { int32 id = 1; }
+message PostServiceGetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["id"]
+    }
+  };
+  int32 id = 1;
+}
 
 message PostServiceGetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["row"]
+    }
+  };
   Post row = 1;
 }
 
 message PostServiceSearchRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: ["keyword"]
+    }
+  };
+
   string keyword = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {pattern: "^start"}];
-  optional string start = 2;
-  optional string end = 3;
+  string start = 2;
+  string end = 3;
 }
 
 message PostServiceSearchResponse {
@@ -39,6 +58,17 @@ message PostServiceSearchResponse {
 }
 
 message Post {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: [
+        "id",
+        "name",
+        "title",
+        "created_at"
+      ]
+    }
+  };
+
   int32 id = 1;
   string name = 2;
   string title = 3;
@@ -46,6 +76,15 @@ message Post {
 }
 
 message DateRange {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      required: [
+        "start",
+        "end"
+      ]
+    }
+  };
+
   string start = 1;
   string end = 2;
 }

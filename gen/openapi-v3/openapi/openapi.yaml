@@ -141,12 +141,19 @@ components:
           type: string
         createdAt:
           type: string
+      required:
+      - createdAt
+      - id
+      - name
+      - title
       type: object
     v1PostServiceGetRequest:
       properties:
         id:
           format: int32
           type: integer
+      required:
+      - id
       type: object
     v1PostServiceGetResponse:
       example:
@@ -158,6 +165,8 @@ components:
       properties:
         row:
           $ref: '#/components/schemas/v1Post'
+      required:
+      - row
       type: object
     v1PostServiceSearchRequest:
       properties:
@@ -168,6 +177,8 @@ components:
           type: string
         end:
           type: string
+      required:
+      - keyword
       type: object
     v1PostServiceSearchResponse:
       example:
