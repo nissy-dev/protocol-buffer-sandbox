@@ -42,7 +42,10 @@ npm run generate
     - 最初から Open API Spec を書いていれば、`orval` をインストールするだけで済んだ
   - Protocol Buffer と Open API Spec の差異を理解する必要がある
     - 実質学習コストが２倍になっているように感じる場面があった
-      - Protocol Buffer は全ての field が optional になる
+      - Protocol Buffer v3 は required の修飾子をサポートしていない
+        - 全てのフィールドは optional として扱われる
+        - [指定されなかったフィールドにはデフォルト値を入れるようになっている](https://protobuf.dev/programming-guides/proto3/#default)
+          - このため、コード生成上の型などは optional にはならない
       - 必須フィールドにしたい場合は、[ここ](https://github.com/nissy-dev/protocol-buffer-sandbox/blob/07b97ac52ba7b97c2e981c7bf007cef92713a1ed/proto/sample/v1/post.proto#L60-L76)のように Protocol Buffer に JSON Schema を書いている
       - Open API Spec を最初から書けばこの差を意識しなくて良いのに...と感じた
 

@@ -8,7 +8,6 @@ export default function App() {
     sampleApiClient.postServiceGet({ id: 1 }).then((res) => {
       const { data } = res;
       setResponse(data.row.name);
-      console.log(data.row);
     });
   }, []);
 
