@@ -34,6 +34,7 @@ npm run generate
   - Protocol Buffer を Open API に変換するツールが少ない
     - v3 系でちゃんとメンテされているものがない
     - v2 系だと `protoc-gen-openapiv2` が良さそうに見えるが、[v3 対応しなさそう](https://github.com/grpc-ecosystem/grpc-gateway/issues/441)
+    - v2 から v3 への変換ツールはあるが... 今後のことも考えるとあんまり持続可能ではなさそう
   - OpenAPI 系のツールが v2 / v3 系でエコシステムが分断されている
     - ツール群もメンテされるものを選ばないとマイグレーションコストがかかりそう
     - コード生成系のツールで良さそうなものは、v3 対応しかしてない場合もある
